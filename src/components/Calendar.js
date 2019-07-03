@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+import Day from "./Day";
 import { weekdays } from "../consts";
 import moment from "moment";
-moment().locale("ua");
+
 export class Calendar extends Component {
 	state = {
 		dateObject: moment()
@@ -38,15 +39,15 @@ export class Calendar extends Component {
 	render() {
         let blanks = [], daysInMonth = [];
         for (let i = 0; i < this.getFirstDayOfMonth(); i++) {
-            blanks.push(<div>blank</div>)
+            blanks.push(<Day blank={true} />)
         }
         for (let d = 1; d <= moment().daysInMonth(); d++) {
-            daysInMonth.push(<div>{d}</div>)
+            daysInMonth.push(<Day blank={false} info={d} />)
         }
         let totalSlots = [...blanks, ...daysInMonth], rows = [], cells = [];
         if (totalSlots.length % 7 !== 0) {
             for (let i = 0; i < totalSlots.length % 7 ; i++) {
-                totalSlots.push(<div/>)
+                totalSlots.push(<Day blank={true} />)
             }
         }
         totalSlots.forEach((row, i) => {
