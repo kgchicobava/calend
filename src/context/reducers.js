@@ -6,7 +6,7 @@ const addAppointmentToCalend = (appointment, state) => {
 }
 
 const removeAppointmentFromCalend = (appointment, state) => {
-
+    return {...state, appointments: [...state.appointments].filter(elem => appointment.time !== elem.time)}
 }
 
 export const reducer = (state, action) => {
@@ -14,7 +14,7 @@ export const reducer = (state, action) => {
         case ADD_APPOINTMENT:
                 console.log("state", state);
                 console.log("action", action)
-            return addAppointmentToCalend(action.appointment, state); 
+            return addAppointmentToCalend(action.appointment, state);
         case REMOVE_APPOINTMENT:
             return removeAppointmentFromCalend(action.appointment, state)
         default:

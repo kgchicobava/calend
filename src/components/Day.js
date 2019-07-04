@@ -6,7 +6,7 @@ import React, {
 	useEffect
 } from "react";
 import Context from "../context/context";
-import moment from "moment";
+import Appointment from "./Appointment";
 
 const formatDateForComparison = (date, dateObject) =>
 	`${date} ${dateObject.format("MMMM")} ${dateObject.format("YYYY")}`;
@@ -26,7 +26,7 @@ const Modal = ({ handleClose, show, children, date, dateObject }) => {
 				className="modal-main"
 				onClick={event => event.stopPropagation()}>
 				{withApp ? (
-					<p>{withApp.text}</p>
+					<Appointment appointment={withApp} />
 				) : (
 					<Fragment>
 						<textarea
@@ -34,10 +34,16 @@ const Modal = ({ handleClose, show, children, date, dateObject }) => {
 							onChange={e => setText(e.target.value)}
 						/>
 						<button
-							onClick={context.addAppointment.bind(this, {
-								text: textValue,
-								time: formatDateForComparison(date, dateObject)
-							})}>
+							onClick={() => {
+								context.addAppointment({
+									text: textValue,
+									time: formatDateForComparison(
+										date,
+										dateObject
+									)
+								});
+								handleClose();
+							}}>
 							Add apointment
 						</button>
 					</Fragment>
