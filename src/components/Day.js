@@ -4,6 +4,9 @@ const Modal = ({ handleClose, show, children }) => {
 	const showHideClassName = show
 		? "modal display-block"
 		: "modal display-none";
+	const addAppointment = () => {
+		
+	}
 
 	return (
 		<div className={showHideClassName} onClick={handleClose}>
@@ -13,6 +16,7 @@ const Modal = ({ handleClose, show, children }) => {
                 {children}
                 <textarea />
 				<button onClick={handleClose}>close</button>
+				<button onClick={addAppointment}>Add apointment</button>
 			</section>
 		</div>
 	);
@@ -31,12 +35,14 @@ class Day extends Component {
 		});
 	};
 	render() {
+		const currentDayClass = this.props.currentDay ? "current-day" : ""
 		if (this.props.blank) {
-			return <div />;
+			return <div className="day-center blank">{` `}</div>;
 		} else {
+            
 			return (
 				<Fragment>
-					<div onClick={this.showModal}>{this.props.info}</div>
+					<div className={`day-center ${currentDayClass}`} onClick={this.showModal} >{this.props.info}</div>
 					<Modal
 						show={this.state.show}
 						handleClose={this.hideModal}

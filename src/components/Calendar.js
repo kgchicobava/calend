@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import Day from "./Day";
-import { weekdays } from "../consts";
+import Weekdays from "./Weekdays";
+import Controls from "./Controls";
+import MonthAndYearDisplay from "./MonthAndYearDisplay";
+import DateGrid from "./DateGrid";
 import moment from "moment";
 
 export class Calendar extends Component {
@@ -8,77 +11,46 @@ export class Calendar extends Component {
 		dateObject: moment()
 	};
 
-	getFirstDayOfMonth = () => {
-		let dateObject = this.state.dateObject;
-		let firstDay = moment(dateObject)
-			.startOf("month")
-			.format("d");
-		return firstDay === 0 ? 7 : firstDay - 1;
-    };
-    
-    getMonth = () => {
-        return this.state.dateObject.format("MMMM")
-    }
+	getMonth = () => {
+		return this.state.dateObject.format("MMMM");
+	};
 
-    onNextMonth = () => {
-        this.setState({
-            dateObject: this.state.dateObject.add(1, "month")
-        })
-    }
+	getYear = () => {
+		return this.state.dateObject.format("YYYY");
+	};
 
-    onPrevMonth = () => {
-        this.setState({
-            dateObject: this.state.dateObject.subtract(1, "month")
-        })
-    }
+	onNextMonth = () => {
+		this.setState({
+			dateObject: this.state.dateObject.add(1, "month")
+		});
+	};
 
-    onCurrentTime = () => {
-        this.setState({dateObject: moment()})
-    }
+	onPrevMonth = () => {
+		this.setState({
+			dateObject: this.state.dateObject.subtract(1, "month")
+		});
+	};
+
+	onCurrentTime = () => {
+		this.setState({ dateObject: moment() });
+	};
 
 	render() {
-        let blanks = [], daysInMonth = [];
-        for (let i = 0; i < this.getFirstDayOfMonth(); i++) {
-            blanks.push(<Day blank={true} />)
-        }
-        for (let d = 1; d <= moment().daysInMonth(); d++) {
-            daysInMonth.push(<Day blank={false} info={d} />)
-        }
-        let totalSlots = [...blanks, ...daysInMonth], rows = [], cells = [];
-        if (totalSlots.length % 7 !== 0) {
-            for (let i = 0; i < totalSlots.length % 7 ; i++) {
-                totalSlots.push(<Day blank={true} />)
-            }
-        }
-        totalSlots.forEach((row, i) => {
-            if (i % 7 !== 0) {
-                cells.push(row)
-            } else {
-                rows.push(cells);
-                cells = [];
-                cells.push(row);
-            }
-            if (i === totalSlots.length - 1) {
-                rows.push(cells)
-            }
-
-        })
-        let daysinmonth = rows.map((d, i) => {
-            return <div className="row">{d}</div>;
-          });
-        
 		return (
 			<div>
-                {this.getMonth()}
-                <button onClick={(e) => this.onPrevMonth()}>Prev</button>
-                <button onClick={(e) => this.onCurrentTime()}>Home</button>
-                <button onClick={(e) => this.onNextMonth()}>Next</button>
-				<div className="row">
-					{weekdays.map(elem => (
-						<div key={elem}>{elem}</div>
-					))}
+				<MonthAndYearDisplay
+					month={this.getMonth()}
+					year={this.getYear()}
+				/>
+				<div className="container">
+					<Controls
+						onPrevMonth={this.onPrevMonth}
+						onCurrentTime={this.onCurrentTime}
+						onNextMonth={this.onNextMonth}
+					/>
+					<Weekdays />
+					<DateGrid dateObject={this.state.dateObject} />
 				</div>
-                {daysinmonth}
 			</div>
 		);
 	}
