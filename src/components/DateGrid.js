@@ -1,9 +1,11 @@
-import React from 'react'
+import React, {useContext, useEffect} from 'react'
 import moment from "moment";
 import Day from "./Day";
-
+import Context from "../context/context";
 
 const DateGrid = (props) => {
+    const context = useContext(Context);
+    useEffect(() => console.log(context.appointments))
     const getFirstDayOfMonth = () => {
         let dateObject = props.dateObject;
         let firstDay = moment(dateObject)
@@ -21,7 +23,7 @@ const DateGrid = (props) => {
             blanks.push(<Day blank={true} />)
         }
         for (let d = 1; d <= moment().daysInMonth(); d++) {
-            daysInMonth.push(<Day blank={false} info={d} currentDay={getCurrentDay(d)} />)
+            daysInMonth.push(<Day blank={false} info={d} dateObject={props.dateObject} currentDay={getCurrentDay(d)} />)
         }
         let totalSlots = [...blanks, ...daysInMonth], rows = [], cells = [];
         if (totalSlots.length % 7 !== 0) {

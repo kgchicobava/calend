@@ -95,3 +95,7 @@
   .blank {
     pointer-events: none;
   }
+
+  .with-appointment {
+    font-style: italic;
+  }
