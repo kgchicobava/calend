@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/calend/static/css/main.f3a17a1b.chunk.css",
+    "main.js": "/calend/static/js/main.48c7c5d4.chunk.js",
+    "main.js.map": "/calend/static/js/main.48c7c5d4.chunk.js.map",
+    "runtime~main.js": "/calend/static/js/runtime~main.309d5b25.js",
+    "runtime~main.js.map": "/calend/static/js/runtime~main.309d5b25.js.map",
+    "static/js/2.b5eaed63.chunk.js": "/calend/static/js/2.b5eaed63.chunk.js",
+    "static/js/2.b5eaed63.chunk.js.map": "/calend/static/js/2.b5eaed63.chunk.js.map",
+    "index.html": "/calend/index.html",
+    "precache-manifest.e27a5480bc3db78a0c8332e3563ccf69.js": "/calend/precache-manifest.e27a5480bc3db78a0c8332e3563ccf69.js",
+    "service-worker.js": "/calend/service-worker.js",
+    "static/css/main.f3a17a1b.chunk.css.map": "/calend/static/css/main.f3a17a1b.chunk.css.map"
+  }
+}
