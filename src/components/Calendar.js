@@ -1,10 +1,10 @@
 import React, { Component } from "react";
+import moment from "moment";
 import Weekdays from "./Weekdays";
 import Controls from "./Controls";
 import MonthAndYearDisplay from "./MonthAndYearDisplay";
 import DateGrid from "./DateGrid";
-import moment from "moment";
-import GlobalState from "../context/GlobalState"
+import GlobalState from "../context/GlobalState";
 
 export class Calendar extends Component {
 	state = {
@@ -37,23 +37,23 @@ export class Calendar extends Component {
 
 	render() {
 		return (
-            <GlobalState>
-			<div>
-				<MonthAndYearDisplay
-					month={this.getMonth()}
-					year={this.getYear()}
-				/>
-				<div className="container">
-					<Controls
-						onPrevMonth={this.onPrevMonth}
-						onCurrentTime={this.onCurrentTime}
-						onNextMonth={this.onNextMonth}
+			<GlobalState>
+				<div>
+					<MonthAndYearDisplay
+						month={this.getMonth()}
+						year={this.getYear()}
 					/>
-					<Weekdays />
-					<DateGrid dateObject={this.state.dateObject} />
+					<div className="container">
+						<Controls
+							onPrevMonth={this.onPrevMonth}
+							onCurrentTime={this.onCurrentTime}
+							onNextMonth={this.onNextMonth}
+						/>
+						<Weekdays />
+						<DateGrid dateObject={this.state.dateObject} />
+					</div>
 				</div>
-			</div>
-            </GlobalState>
+			</GlobalState>
 		);
 	}
 }

@@ -1,17 +1,25 @@
-import React, {useContext} from 'react'
+import React, { useContext } from "react";
 import Context from "../context/context";
 
+const Appointment = props => {
+	const context = useContext(Context);
+	return (
+		<div className="appointment">
+			<div className="appointment-day">{props.appointment.time}</div>
+			<div className="appointment-body">
+				{props.appointment.text}
+				<label title="Delete">
+					<span
+						className="delete"
+						onClick={() =>
+							context.removeAppointment(props.appointment)
+						}>
+						&times;
+					</span>
+				</label>
+			</div>
+		</div>
+	);
+};
 
-
-const Appointment = (props) => {
-    console.log(props)
-    const context = useContext(Context);
-    return (
-        <div>
-            {props.appointment.text}
-            <span onClick={() => context.removeAppointment(props.appointment)}>X</span>
-        </div>
-    )
-}
-
-export default Appointment
+export default Appointment;
